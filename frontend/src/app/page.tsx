@@ -165,19 +165,19 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-8 max-w-4xl mx-auto flex flex-col gap-8">
+    <main className="min-h-screen p-16 max-w-7xl mx-auto flex flex-col gap-12">
       {/* Header */}
       <header className="text-center space-y-4">
-        <h1 className="text-5xl font-bold tracking-tighter text-white">
+        <h1 className="text-6xl font-bold tracking-tighter text-white">
           LEONCHRI04 <span className="text-brand-yellow">GENERATOR</span>
         </h1>
-        <p className="text-gray-400 text-lg">
+        <p className="text-gray-400 text-2xl">
           Trasforma video YouTube in script virali con l'AI.
         </p>
       </header>
 
       {/* Input Section */}
-      <section className="bg-surface p-8 rounded-2xl border border-gray-800 shadow-2xl space-y-6">
+      <section className="bg-surface p-12 rounded-2xl border border-gray-800 shadow-2xl space-y-10">
         <div className="flex gap-4 items-end">
           <Input
             label="URL Video YouTube"
@@ -198,7 +198,7 @@ export default function Home() {
         </div>
 
         {/* Progress Steps */}
-        <div className="grid grid-cols-4 gap-4 text-center text-sm pt-4 border-t border-gray-800">
+        <div className="grid grid-cols-4 gap-6 text-center text-base pt-8 border-t border-gray-800">
           <StepIndicator label="1. Trascrivi" active={currentStep === "transcribing"} done={isStepDone("transcribed")} />
           <StepIndicator label="2. Argomenti" active={currentStep === "extracting"} done={isStepDone("extracted")} />
           <StepIndicator label="3. Ricerca" active={currentStep === "researching"} done={isStepDone("researched")} />
@@ -293,7 +293,7 @@ export default function Home() {
 
 function StepIndicator({ label, active, done }: { label: string, active: boolean, done: boolean }) {
   return (
-    <div className={`p-3 rounded-lg border transition-all duration-300 ${active ? "bg-brand-yellow/10 border-brand-yellow text-brand-yellow font-bold animate-pulse" :
+    <div className={`p-4 rounded-lg border text-lg transition-all duration-300 ${active ? "bg-brand-yellow/10 border-brand-yellow text-brand-yellow font-bold animate-pulse" :
       done ? "bg-green-900/10 border-green-500/30 text-green-500" :
         "bg-black border-gray-800 text-gray-600"
       }`}>

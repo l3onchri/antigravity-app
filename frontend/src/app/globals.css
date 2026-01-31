@@ -19,3 +19,68 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+/* =================================================================
+   MOBILE OPTIMIZATIONS (Only < 768px)
+   Desktop layout (verified perfectly) remains UNTOUCHED.
+   These styles override the "Giant" desktop values for mobile usability.
+   ================================================================= */
+@media (max-width: 767px) {
+
+  /* Reduce main container padding from p-16 to reasonable mobile size */
+  main {
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Shrink the giant text-6xl title */
+  h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Shrink subtitle */
+  p.text-2xl {
+    font-size: 1.125rem !important;
+    /* text-lg equivalent */
+  }
+
+  /* Reduce section padding */
+  section {
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Stack Input and Button nicely vertical */
+  div.flex.items-end {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem !important;
+  }
+
+  /* Adjust Input/Button heights & texts for mobile */
+  input,
+  button {
+    padding: 1rem !important;
+    font-size: 1rem !important;
+    width: 100% !important;
+  }
+
+  /* Fix Grid columns to 2 instead of 4 */
+  div.grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Fix step indicator text */
+  div.grid>div {
+    font-size: 0.875rem !important;
+    padding: 0.75rem !important;
+  }
+
+  /* Result sections title adjustment */
+  h2.text-3xl,
+  h2.text-2xl {
+    font-size: 1.5rem !important;
+  }
+}
