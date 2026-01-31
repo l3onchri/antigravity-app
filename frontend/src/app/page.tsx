@@ -36,13 +36,24 @@ export default function Home() {
   // Step 1: Transcribe
   const handleTranscribe = async () => {
     if (!url) return;
+
+    // Validate YouTube URL
+    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+    if (!youtubeRegex.test(url)) {
+      setError("Inserisci un URL YouTube valido (es. https://youtube.com/watch?v=...)");
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setCurrentStep("transcribing");
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    // Sanitize API URL: remove quotes and trailing slashes
+    let apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    apiUrl = apiUrl.replace(/['"]+/g, '').replace(/\/$/, '');
+
     try {
-      console.log("Calling transcribe API...", url);
+      console.log("Calling transcribe API at:", apiUrl, "for URL:", url);
       const res = await fetch(`${apiUrl}/api/step/transcribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -56,12 +67,12 @@ export default function Home() {
         setTranscript(data.data);
         setCurrentStep("transcribed");
       } else {
-        setError(data.error || "Errore sconosciuto");
+        setError(data.error || "Errore sconosciuto dal server");
         setCurrentStep("error");
       }
     } catch (e: any) {
       console.error("Fetch error:", e);
-      setError(`Errore di connessione: ${e.message || e}`);
+      setError(`Errore di connessione (${apiUrl}): ${e.message || e}`);
       setCurrentStep("error");
     }
     setLoading(false);
